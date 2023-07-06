@@ -1,0 +1,48 @@
+P{
+    color: aqua;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    height: 100vh;
+    width: 100vh;
+    background: linear-gradient(90deg, rgba(65, 185, 131, 1) 0%,
+     rgba(0, 212, 255, 1)100%);
+
+}
+
+.centro{
+    display: grid;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto);
+}
+
+.quadradro{
+    width: 100px;
+    height: 100px;
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quadradro:nth-child(1),
+.quadradro:nth-child(2),
+.quadradro:nth-child(3){
+    border-top: none;
+}
+
+.msg_vendeu{
+    display: nome;
+}
