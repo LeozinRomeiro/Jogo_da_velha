@@ -10,9 +10,8 @@ P{
 
 body{
     height: 100vh;
-    width: 100vh;
-    background: linear-gradient(90deg, rgba(65, 185, 131, 1) 0%,
-     rgba(0, 212, 255, 1)100%);
+    width: 100vw;
+    background: linear-gradient(90deg, rgb(61, 0, 69) 30%, rgb(0, 11, 165)100%);
 
 }
 
@@ -28,21 +27,71 @@ body{
     grid-template-columns: repeat(3, auto);
 }
 
-.quadradro{
-    width: 100px;
-    height: 100px;
-    border: 2px solid white;
+.quadrado{
+    width: 150px;
+    height: 150px;
+    border: 2px solid rgb(0, 0, 0);
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
-.quadradro:nth-child(1),
-.quadradro:nth-child(2),
-.quadradro:nth-child(3){
-    border-top: none;
+.quadrado.X,
+.quadrado.O{
+    cursor: not-allowed;/*Indicar campo proibido no cursor*/    
 }
 
+.quadrado:nth-child(1),
+.quadrado:nth-child(2),
+.quadrado:nth-child(3){
+    border-top: none;/* Retirar borda dos quadrados */
+}
+.quadrado:nth-child(1),
+.quadrado:nth-child(4),
+.quadrado:nth-child(7){
+    border-left: none;
+}
+.quadrado:nth-child(3),
+.quadrado:nth-child(6),
+.quadrado:nth-child(9){
+    border-right: none;
+}
+.quadrado:nth-child(7),
+.quadrado:nth-child(8),
+.quadrado:nth-child(9){
+    border-bottom: none;
+}
+
+/* Mensagem de vitoria */
 .msg_vendeu{
     display: nome;
+}
+
+.quadrado.X::before,/* Divivir o preenchimento do quadrado em 2 (before e after) */
+.quadrado.X::after{
+    content: "";
+    height: calc(150px * 0.15);/* Falar que a altura é 15% da celula(por que o tamanho dela é 150 pixel)*/
+    width: calc(150px * 1.2);/* Falar que a largura é 15% da celula(por que o tamanho dela é 150 pixel) */
+    background: black;
+    position: absolute;
+}
+
+.quadrado.X::before{
+    transform: rotate(45deg);/*Rotacionar metade do conteudo da celular (before)*/
+}
+
+.quadrado.X::after{
+    transform: rotate(-45deg);/*Rotacionar metade do conteudo da celular (after) no sentido contraio da outra*/
+}
+
+.quadrado.O::before,
+.quadrado.O::after{
+    content: "";
+    height: calc(150px * 0.95);
+    width: calc(150px * 0.95);
+    background: black;
+    position: absolute;
+    border-radius: 50%;/*Aredondar o conteudo*/
+    
 }
