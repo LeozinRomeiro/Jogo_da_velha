@@ -1,0 +1,103 @@
+const quadrado_elemento  = document.querySelectorAll("[data-quadrado]");//Pega todos os elementos html que possuiem o atributo "data quadrado" e armazena na variavel quadrado_elemento
+//selecionar celula quadrado
+const tabuleiro = document.querySelector("[data-tabuleiro]");//Busca o elemento que possui o atributo "data tabuleiro" e armazena na variavel tabuleiro
+const Texto_venceu = document.querySelector("[data-texto-venceu]");
+const Venceu = document.querySelector("[data-venceu]");
+const Reiniciar = document.querySelector("[data-reiniciar]"); 
+
+let Turno = false;
+
+const Combinacoes_vitoria = [
+    [0,1,2],//Numero representando os quadrados essa lista mostra as conbições de vitoria
+    [3,4,5],
+    [6,7,8],
+    [0,4,8],
+    [2,4,6],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+];
+
+const Combinacoes_velha=[
+
+]
+
+const Iniciar=()=>{//Define uma funcao inciar 
+    for (const quadrado of quadrado_elemento ) {
+        quadrado.addEventListener("click", Acontecer_click, {once: true});//utilizando o método addEventListener. O evento click é associado à função Acontecer_click, e a opção {once: true} garante que o evento será tratado apenas uma vez.
+        //limitar para apenas um click
+        //Lis tar o evento click na celula; Onde para limita apenas um click;
+    }
+
+    tabuleiro.classList.add("X");//adiciona inicialmente o x a tabuleiro/board
+};
+
+const Finalizar = (Empate)=>{//Funcao finalizar para verificar sem tem empate
+    if(Empate)
+        Texto_venceu.innerText="Empate";//Adiciona o texto a variriavel vinculada ao html
+    else{
+        Texto_venceu.innerText=Turno?"Circulo Venceu!":"X Venceu!";//Expressão ternaria para colocar Circulo ou X na vitoria
+    }
+
+    Venceu.classList.add("Surge-messagem");
+
+}
+
+
+const Verificar_vitoria = (quadrado_jogador)=>{
+    return Combinacoes_vitoria.some(Combinacao=>{
+        return Combinacao.every((index)=>{
+            return quadrado_elemento[index].classList.contains(quadrado_jogador);
+        });
+    });
+};
+
+const Registrar = (quadrado, Simpolo)=>{
+    quadrado.classList.add(Simpolo);
+};
+
+const Alternar_turno=()=>{//A função Alternar_turno é definida para alternar o turno do jogador após cada jogada.
+    Turno = !Turno;//Inverte o valor da variavel turno
+
+    tabuleiro.classList.remove("O");//Remove as classes da variavel do tabuleiro/board
+    tabuleiro.classList.remove("X");
+
+    if(Turno)//Se na variavel turno simples para determinar qual classe atribui ao tabuleiro/board
+        tabuleiro.classList.add("O");
+    else
+        tabuleiro.classList.add("X");
+    
+};
+
+const Acontecer_click=(e)=>{//é definida para tratar o evento de clique em um quadrado. Ela é acionada quando o jogador clica em uma quadrado do tabuleiro
+
+    // Colocar a marca (X ou circulo)
+    const quadrado = e.target;
+    const Simpolo = Turno ? "O" : "X";//A expressão ternária é uma forma simplificada de escrever um condicional if-else. A estrutura é a seguinte: condição ? valorSeVerdadeiro : valorSeFalso;
+    //Se Turno for avaliado como verdadeiro (ou seja, o valor é true), a classe "O" será atribuída à variável Simpolo.
+    //Se Turno for avaliado como falso (ou seja, o valor é false), a classe "X" será atribuída à variável Simpolo.
+    // Aqui, Turno é uma variável que controla o turno do jogador.
+
+    Registrar(quadrado, Simpolo);
+
+
+
+    //Verificar por vitoria
+
+    const Vitoria=Verificar_vitoria(Simpolo);//Verifica vitoria pede o simpolo da vez 
+    if(Vitoria){
+        Finalizar(false);
+    }
+
+    //Verificar por empate
+
+
+
+    //Mudar símbolo apos o click
+
+    Alternar_turno();
+};
+
+Iniciar();
+
+

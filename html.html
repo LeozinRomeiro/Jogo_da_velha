@@ -7,9 +7,9 @@
         <title>Jogo da Velha</title>
     </head>
     <body>
-        <div class="centro">
-            <div class="quadrado X" data-quadrado></div>
-            <div class="quadrado O" data-quadrado></div>
+        <div class="centro" data-tabuleiro>
+            <div class="quadrado" data-quadrado></div>
+            <div class="quadrado" data-quadrado></div>
             <div class="quadrado" data-quadrado></div>
             <div class="quadrado" data-quadrado></div>
             <div class="quadrado" data-quadrado></div>
@@ -18,9 +18,9 @@
             <div class="quadrado" data-quadrado></div>
             <div class="quadrado" data-quadrado></div>
         </div>
-        <div class="msg_vendeu" data-vendeu>
-            <p>X vendeu!</p>
-            <button>Reiniciar</button>
+        <div class="msg_vendeu" data-venceu>
+            <p class="venceu" data-texto-venceu>X venceu!</p>
+            <button class="reiniciar" data-reiniciar>Reiniciar</button>
         </div>
         <script src="./java.js"></script>
     </body> 
