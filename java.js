@@ -3,9 +3,15 @@ const quadrado_elemento  = document.querySelectorAll("[data-quadrado]");//Pega t
 const tabuleiro = document.querySelector("[data-tabuleiro]");//Busca o elemento que possui o atributo "data tabuleiro" e armazena na variavel tabuleiro
 const Texto_venceu = document.querySelector("[data-texto-venceu]");
 const Venceu = document.querySelector("[data-venceu]");
-const Reiniciar = document.querySelector("[data-reiniciar]"); 
+const Reiniciar = document.querySelector("[data-reiniciar]");
+const Placar = document.querySelector("[data-placar]");
+const X = document.querySelector("[data-X]");
+const O = document.querySelector("[data-O]");
 
 let Turno = false;
+var placarX=0;
+var placarO=0;
+
 
 const Combinacoes_vitoria = [
     [0,1,2],//Numero representando os quadrados essa lista mostra as conbições de vitoria
@@ -18,10 +24,6 @@ const Combinacoes_vitoria = [
     [2,5,8],
 ];
 
-const Combinacoes_velha=[
-    
-]
-
 const Iniciar=()=>{//Define uma funcao inciar 
     for (const quadrado of quadrado_elemento ) {//Faz uma laçoi de repetição para que todos os elementos quadrado seja preenchidos 
         quadrado.classList.remove("O","X");
@@ -30,19 +32,34 @@ const Iniciar=()=>{//Define uma funcao inciar
         //limitar para apenas um click
         //Lis tar o evento click na celula; Onde para limita apenas um click;
     }
-
-    tabuleiro.classList.add("X");//adiciona inicialmente o x a tabuleiro/board
+    Vez=Turno ? "O" : "X";
+    tabuleiro.classList.add(Vez);//adiciona inicialmente o x a tabuleiro/board
     Venceu.classList.remove("Surge-messagem");
 };
+
+const Aumentar=(Simpolo)=>{
+    if(Simpolo=="X"){
+        X.innerText="Leonardo: "+placarX;
+    }else{
+        O.innerText="Rafaela: "+placarO;
+    }
+}
 
 const Finalizar = (Empate,jogador)=>{//Funcao finalizar para verificar sem tem empate
     if(Empate)
         Texto_venceu.innerText="Empate";//Adiciona o texto a variriavel vinculada ao html; ta pegando a tag com a data texto_venceu e adicionando texto nela
     else{
         Texto_venceu.innerText=Turno?jogador+" Venceu!":jogador+" Venceu!";//Expressão ternaria para colocar Circulo ou X na vitoria
+        if(jogador=="X"){
+            placarX+=1;
+        }else{
+            placarO+=1;
+        }
+        Aumentar(jogador);
     }
 
     Venceu.classList.add("Surge-messagem");
+    
 
 }
 
