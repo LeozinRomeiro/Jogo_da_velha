@@ -5,12 +5,13 @@ const Texto_venceu = document.querySelector("[data-texto-venceu]");
 const Venceu = document.querySelector("[data-venceu]");
 const Reiniciar = document.querySelector("[data-reiniciar]");
 const Placar = document.querySelector("[data-placar]");
-const X = document.querySelector("[data-X]");
-const O = document.querySelector("[data-O]");
+const pontuação = document.querySelector("[data-pontuação]");
 
 let Turno = false;
-var placarX=0;
-var placarO=0;
+var placar1=0;
+var placar2=0;
+var jogador1="Jogador1";
+var jogador2="Jogador2";
 
 
 const Combinacoes_vitoria = [
@@ -37,12 +38,8 @@ const Iniciar=()=>{//Define uma funcao inciar
     Venceu.classList.remove("Surge-messagem");
 };
 
-const Aumentar=(Simpolo)=>{
-    if(Simpolo=="X"){
-        X.innerText="Leonardo: "+placarX;
-    }else{
-        O.innerText="Rafaela: "+placarO;
-    }
+const Aumentar=()=>{
+    pontuação.innerText=jogador1+" "+placar1+" X "+placar2+" "+jogador2;
 }
 
 const Finalizar = (Empate,jogador)=>{//Funcao finalizar para verificar sem tem empate
@@ -51,11 +48,11 @@ const Finalizar = (Empate,jogador)=>{//Funcao finalizar para verificar sem tem e
     else{
         Texto_venceu.innerText=Turno?jogador+" Venceu!":jogador+" Venceu!";//Expressão ternaria para colocar Circulo ou X na vitoria
         if(jogador=="X"){
-            placarX+=1;
+            placar1+=1;
         }else{
-            placarO+=1;
+            placar2+=1;
         }
-        Aumentar(jogador);
+        Aumentar();
     }
 
     Venceu.classList.add("Surge-messagem");

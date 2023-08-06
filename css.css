@@ -86,28 +86,25 @@ body{
 }
 
 .placar{
-    
-    /* display: flex;    */
-    position: fixed;/* Indicar posicição fixa  */
-    top: 0;/*  */
-    left: 0;
-    right: 0;
-    bottom: 0;
+    background-color: black;
+    width: 800px;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    flex-direction: column; 
+    margin: 0 auto;
+    position: relative;
 }
 
 .texto_placar{
     font-size: 5rem;
     color: white;
-    position: fixed;/* Indicar posicição fixa  */
-    top: 0;/*  */
-    left: 0;
-    right: 0;
-    bottom: 0;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
+    top: 150%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 .reiniciar{
