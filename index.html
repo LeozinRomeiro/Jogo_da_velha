@@ -4,13 +4,25 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/css.css   ">
+        <script src="jquery-3.7.1.min.js"></script>
         <title>Jogo da Velha</title>
     </head>
     <body>
         <div class="placar" data-placar>
-            <p class="texto_placar" data-pontuação >
+            
+            <input class="apelido" type="text">
+            <div class="quadro">
+                <h1 class="pontuacao" >0</h1>
+            </div>
+            <div class="quadro">
+                <h1 class="pontuacao" >0</h1>
+            </div>
+            <input class="apelido" type="text">
+            
+
+            <!-- <p class="texto_placar" data-pontuação >
                 Jogador_X 0 X 0 Jogador_O 
-            </p>
+            </p> -->
         </div>
         <div class="centro" data-tabuleiro>
             <div class="quadrado" data-quadrado></div>
@@ -27,6 +39,6 @@
             <p class="venceu" data-texto-venceu></p>
             <button class="reiniciar" data-reiniciar>Reiniciar</button>
         </div>
-        <script src="./java.js"></script>
+        <script src="./jquery.js"></script>
     </body> 
 </html>

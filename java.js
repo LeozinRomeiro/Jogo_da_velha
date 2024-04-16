@@ -39,7 +39,7 @@ const Iniciar=()=>{//Define uma funcao inciar
 };
 
 const Aumentar=()=>{
-    pontuação.innerText=jogador1+" "+placar1+" X "+placar2+" "+jogador2;
+    //pontuação.innerText=jogador1+" "+placar1+" X "+placar2+" "+jogador2;
 }
 
 const Finalizar = (Empate,jogador)=>{//Funcao finalizar para verificar sem tem empate

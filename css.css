@@ -11,6 +11,23 @@ body{
 
 }
 
+.quadro{
+    background-color: white;
+    width: 75px;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    font-size: 40px;
+}
+
+.apelido{
+    width: 250px;
+    height: 25px;
+    font-size: 20px;
+}
+
 .centro{
     display: grid;
     width: 100%;
@@ -91,7 +108,7 @@ body{
     height: 100px;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     margin: 0 auto;
     position: relative;
