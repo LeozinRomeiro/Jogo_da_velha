@@ -19,19 +19,50 @@ const Combinacoes_vitoria = [
 ];
 
 const Iniciar=()=>{
-    spaces.removeClass("X");
+    spaces.removeClass("X","O");
     spaces.on({click:()=>AcontecerClick(event)})
-    time=turn?"O":"X";
-    board.addClass(time);
-    messageFinisher.removeClass("Surge-messagem")
+    board.addClass(turn?"O":"X");
+    Venceu.removeClass("Surge-messagem")
 }
 
-Register(space, player){
+const Finalizar = (empate,player)=>{
+    if(empate)
+        messageFinisher.text("Empate")
+    else{
+        messageFinisher.text(player+" Venceu");
+    }
+    Venceu.addClass("Surge-messagem")
+}
+
+const Register = (space, player)=>{
     $(space).addClass(player);
 }
 
-verificarVitoria(){
+const verificarVitoria = (quadrado_jogador) => {
+    return Combinacoes_vitoria.some(Combinacao => {
+        console.log(quadrado_jogador)
+        console.log(Combinacao.every((index) => {
+            return $(`#${index}`).hasClass(quadrado_jogador);
+        }))
+        return Combinacao.every((index) => {
+            return $(`[data-quadrado="${index}"]`).hasClass(quadrado_jogador);
+        });
+    });
+};
+
+const verificarEmpate = () => {
+    return $("[data-quadrado]").toArray().every(quadrado => {
+        return $(quadrado).hasClass('X') || $(quadrado).hasClass('O');
+    });
+};
+
+const alterTurn=()=>{
+    turn = !turn
+
+    board.removeClass("X");
+    board.removeClass("O");
     
+    board.addClass(turn?"O":"X")
 }
 
 const AcontecerClick=(e)=>{
@@ -39,8 +70,12 @@ const AcontecerClick=(e)=>{
     const player = turn ? "O" : "X";
     Register(space, player);
     if(verificarVitoria(player)){
-
+        Finalizar(false,player)
     }
+    if(verificarEmpate()){
+        Finalizar(true,player)
+    }
+    alterTurn();
 }
 
 Iniciar();
