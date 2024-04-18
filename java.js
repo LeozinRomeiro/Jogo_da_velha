@@ -62,6 +62,9 @@ const Finalizar = (Empate,jogador)=>{//Funcao finalizar para verificar sem tem e
 
 const Verificar_vitoria = (quadrado_jogador)=>{
     return Combinacoes_vitoria.some(Combinacao=>{
+       console.log(Combinacao.every((index)=>{
+            return quadrado_elemento[index].classList.contains(quadrado_jogador);
+        }))
         return Combinacao.every((index)=>{
             return quadrado_elemento[index].classList.contains(quadrado_jogador);
         });
