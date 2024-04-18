@@ -7,6 +7,11 @@ const scoreboard = $("[data-placar]");
 const pontuação = $("[data-pontuação]");
 let turn = false
 
+const playerOfTheTurn = ()=>{
+    let player = turn?"O":"X"
+    return player
+}
+
 const winningCombinations = [
     [0,1,2],
     [3,4,5],
@@ -21,8 +26,11 @@ const winningCombinations = [
 const Start=()=>{
     spaces.removeClass("X");
     spaces.removeClass("O");
-    spaces.one({click:()=>happenClick(event)})
-    board.addClass(turn?"O":"X");
+    spaces.one('click', (event) => {
+        event.stopPropagation();
+        happenClick(event);
+    });
+    board.addClass(playerOfTheTurn());
     win.removeClass("Surge-messagem")
 }
 
@@ -31,18 +39,21 @@ const end = (empate,player)=>{
         messageFinisher.text("Empate")
     else{
         messageFinisher.text(player+" Venceu");
+        let punctuation = parseInt($(`[data-pontuacao-${player}]`).text())
+        $(`[data-pontuacao-${player}]`).text(punctuation+1)
     }
     win.addClass("Surge-messagem")
 }
 
-const Register = (space, player)=>{
-    $(space).addClass(player);
+Register = (space, player)=>{
+    $(space).addClass(player)
+    alterTurn();
 }
 
-const verifyWin = (quadrado_jogador) => {
+const verifyWin = (player) => {
     return winningCombinations.some(Combinacao => {
         return Combinacao.every((index) => {
-            return $(`#${index}`).hasClass(quadrado_jogador);
+            return $(`#${index}`).hasClass(player);
         });
     });
 };
@@ -59,20 +70,22 @@ const alterTurn=()=>{
     board.removeClass("X");
     board.removeClass("O");
     
-    board.addClass(turn?"O":"X")
+    board.addClass(playerOfTheTurn())
 }
 
 const happenClick=(e)=>{
     const space = $(e.target);
-    const player = turn ? "O" : "X";
-    Register(space, player);
-    if(verifyWin(player)){
-        end(false,player)
+    if(!$(space).hasClass('X') || !$(space).hasClass('O')){
+        let player = playerOfTheTurn()
+        console.log($(e.target))
+        Register(space, player);
+        if(verifyWin(player)){
+            end(false,player)
+        }
+        if(verifyTie()){
+            end(true,player)
+        }
     }
-    if(verifyTie()){
-        end(true,player)
-    }
-    alterTurn();
 }
 
 Start();
